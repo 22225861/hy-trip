@@ -32,7 +32,7 @@ import useCityStore from '@/stores/modules/city'
 import {storeToRefs} from 'pinia/dist/pinia'
 import cityGroup from './cpns/city-group-item.vue'
 
-const router = useRouter()
+const router =  useRouter()
 //搜索框功能
 const searchValue = ref("")
 const cancelClick = () => {
