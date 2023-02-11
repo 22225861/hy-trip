@@ -22,6 +22,10 @@ const router = createRouter({
         {
             path:'/favor',
             component:()=> import('@/views/favor/favor.vue')
+        },
+        {
+            path:'/city',
+            component:()=> import('@/views/city/city.vue')
         }
 
 
