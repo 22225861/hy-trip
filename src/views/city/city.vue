@@ -15,7 +15,8 @@
       </van-tabs>
     </div>
     <div class="content">
-<!--     -->
+      <!-- <city-group :group-data="currentGroup" />
+    <city-group :group-data="currentGroup" /> -->
       <template v-for="(value,key,index) in allCities">
         <city-group :group-data="value" v-show="tabActive === key"></city-group>
       </template>
