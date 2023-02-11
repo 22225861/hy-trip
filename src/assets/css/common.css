@@ -15,6 +15,6 @@ body{
     background-color: #fff;
     overflow: auto;
 }
-.bottom-gray-line {
+.bottom-gray-line  {
     border-bottom: 1px solid var(--line-color);
 }
