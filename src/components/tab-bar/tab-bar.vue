@@ -1,60 +1,50 @@
 <template>
   <div class="tab-bar">
-
-    <template v-for="(item,index) in tabbarData">
-<!--      <div class="tab-bar-item" @click="itemClick(index,item)"-->
-<!--           :class="{active: currentIndex === index}">-->
-<!--        <img v-if="currentIndex!==index" :src="getAssetUrl(item.image)" alt="">-->
-<!--        <img v-else :src="getAssetUrl(item.imageActive)" alt="">-->
-<!--        <span class="text">{{item.text}}</span>-->
-<!--      </div>-->
-      <van-tabbar route active-color="#ff9645">
-        <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
-        <van-tabbar-item to="/favor" icon="like-o">收藏</van-tabbar-item>
-        <van-tabbar-item to="/order" icon="orders-o">订单</van-tabbar-item>
-        <van-tabbar-item to="/message" icon="chat-o">消息</van-tabbar-item>
-      </van-tabbar>
-    </template>
+    <van-tabbar v-model="currentIndex" active-color="#ff9854" route>
+      <template v-for="(item, index) in tabbarData">
+        <van-tabbar-item :to="item.path">
+          <template #default>
+            <span>{{ item.text }}</span>
+          </template>
+          <template #icon>
+            <img v-if="currentIndex !== index" :src="getAssetUrl(item.image)" alt="">
+            <img v-else :src="getAssetUrl(item.imageActive)" alt="">
+          </template>
+        </van-tabbar-item>
+      </template>
+    </van-tabbar>
   </div>
 </template>
 
 <script setup>
-import tabbarData from '@/assets/data/tabbar'
-import { getAssetUrl} from '@/utils/load_assets_img'
-import {ref} from 'vue'
-import {useRouter} from 'vue-router'
-const router=useRouter()
-const currentIndex=ref(0)
-const itemClick = (index,item) => {
+
+import tabbarData from "@/assets/data/tabbar.js"
+import { getAssetUrl } from "@/utils/load_assets_img.js"
+import {ref, watch} from "vue";
+import {useRoute} from 'vue-router'
+const route=useRoute()
+const currentIndex = ref(0)
+watch(route,(newRoute)=>{
+  const index=tabbarData.findIndex(item=>item.path===newRoute.path)
+  if (index===-1) return
   currentIndex.value=index
-  router.push(item.path)
-}
+})
 </script>
 
-<style scoped lang="less">
-.tab-bar{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  display: flex;
-  border: 1px solid #f3f3f3;
-}
-  .tab-bar-item{
-  flex: 1;
-  display: flex;
-    flex-direction: column;
-  justify-content: center;
-  align-items: center;
+<style lang="less" scoped>
+.tab-bar {
+  // 局部定义一个变量: 只针对.tab-bar子元素才生效
+  // --van-tabbar-item-icon-size: 30px !important;
+
+  // 找到类, 对类中的CSS属性重写
+  // :deep(.class)找到子组件的类, 让子组件的类也可以生效
+  :deep(.van-tabbar-item__icon) {
+    font-size: 50px;
   }
-   &.active{
-    color: var(--primary-color);
-   }
-   img{
-     width: 36px;
-   }
-   text{
-     margin-top: 2px;
-   }
+
+  img {
+    height: 26px;
+  }
+}
+
 </style>
