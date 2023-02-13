@@ -25,13 +25,15 @@
 
 <script setup>
 
-defineProps({
+const props=defineProps({
   itemData: {
     type: Object,
     default: () => ({})
   }
 })
-
+// const itemClick = () => {
+//   console.log("点击v3")
+// }
 </script>
 
 <style lang="less" scoped>
