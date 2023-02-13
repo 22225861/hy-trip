@@ -53,6 +53,7 @@ getDetailInfos(houseId).then(res=>{
 
 // tabControl相关操作
 const detailRef = ref()
+console.log(detailRef.value)
 const { scrollTop } = useScroll(detailRef)
 const showTabControl = computed(() => {
   return scrollTop.value >= 300

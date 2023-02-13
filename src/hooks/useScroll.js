@@ -21,6 +21,7 @@ import {throttle } from 'underscore'
 //     })
 // }
 export default function useScroll(elRef) {
+
     let el = window
     const isReachBottom = ref(false)
     const clientHeight = ref(0)
@@ -45,6 +46,7 @@ export default function useScroll(elRef) {
     }, 100)
 
     onMounted(() => {
+        console.log(elRef.value)
         if (elRef) el = elRef.value
         el.addEventListener("scroll", scrollListenerHandler)
     })
